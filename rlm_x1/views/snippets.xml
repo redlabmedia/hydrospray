@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<template id="rlm_two_columns" inherit_id="website.snippets" name="Two Column Snippet">
 		<xpath expr="//div[@id='snippet_content']/div[hasclass('o_panel_body')]" position="inside">
@@ -17,6 +17,49 @@
 							<div class="col-md-6">
 								<h3>Right</h3>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</xpath>
+	</template>
+	<template id="rlm_page_top" inherit_id="website.snippets" name="Page Top Formatted">
+		<xpath expr="//div[@id='snippet_content']/div[hasclass('o_panel_body')]" position="inside">
+			<div>
+				<div class="oe_snippet_thumbnail">
+					<img class="oe_snippet_thumbnail_img" src="/rlm_x1/static/src/img/ui/page_top.jpg"/>
+					<span class="oe_snippet_thumbnail_title">Page Top Formatted</span>
+				</div>
+				<section class="oe_snippet_body s_text_image bg-white">
+					<div class="container">
+						<div class="row">
+							<div class="mb32 col-md-6 mt32">
+								<h3 style="text-align: right;" class="o_default_snippet_text"/>
+								<p> </p>
+								<p/>
+								<h1 class="text-center" style="font-weight: 500;line-height: 1.1;text-align: center"/>
+								<p> </p>
+								<p/>
+								<blockquote style="text-align: left; font-weight: 500; line-height: 1.1;">
+									<span class="text-black" style="font-size: 24px; font-weight: bold;">Kondor<b style="font-weight: bold"><font class="text-black" style="">®</font></b>&amp;nbsp;&amp;nbsp;Touchless Automatic Suite</span>
+								</blockquote>
+								<p> </p>
+								<h2 class="text-center" style="text-align: left; font-weight: 500; line-height: 1.1;">
+									<font class="text-gray" style="color: rgb(85, 85, 85); font-size: 18px;">
+										<i>Designed to Fit Every Bay and Every Budget.</i>
+									</font>
+								</h2>
+								<p style="text-align: right;" class="o_default_snippet_text"/>
+								<div style="text-align: left;">
+									<span style="color: rgb(85, 85, 85); text-align: justify;">Delivering a clean wash every time, the Kondor equipment line is designed for sleek operation in a comfortable, open environment. This equipment has an innovative design and installation options perfect for almost every bay and business.</span>
+									<br/>
+								</div>
+								<p/>
+								<p style="text-align: left;" class="o_default_snippet_text">&amp;nbsp;</p>
+							</div>
+							<div class="col-md-6 mt32 mb32">
+								<img class="img img-responsive pull-left mb16" src="/rlm_x1/static/src/img/Kondor-Belanger%20Logos.jpg" alt="Odoo text and image block" data-original-title="" title=""/>
 							</div>
 						</div>
 					</div>
