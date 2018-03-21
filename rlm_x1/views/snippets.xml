@@ -559,4 +559,25 @@
 			</div>
 		</xpath>
 	</template>
+	<template id="rlm_cat_menu" inherit_id="website.snippets" name="Category Menu">
+		<xpath expr="//div[@id='snippet_content']/div[hasclass('o_panel_body')]" position="inside">
+			<div>
+				<div class="oe_snippet_thumbnail">
+					<img class="oe_snippet_thumbnail_img" src="/rlm_x1/static/src/img/ui/cat_menu.jpg"/>
+					<span class="oe_snippet_thumbnail_title">Category Menu</span>
+				</div>
+				<section class="oe_snippet_body">
+					<h2>Menu</h2>
+					<ul>
+						<li>Item 1</li>
+						<li>Item 2</li>
+						<li>Item 3</li>
+					</ul>
+					<p>
+						<br/>
+					</p>
+				</section>
+			</div>
+		</xpath>
+	</template>
 </odoo>
