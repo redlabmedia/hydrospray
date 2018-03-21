@@ -13,16 +13,8 @@
 				<main>
 					<div class="row">
 						<div class="col-md-2">
+							<div id="left_menu_top" class="oe_structure col-md-12 mb16 mt16"/>
 							<div class="col-md-12 mb16 mt16">
-								<h2>Menu</h2>
-								<ul>
-									<li>Item 1</li>
-									<li>Item 2</li>
-									<li>Item 3</li>
-								</ul>
-								<p>
-									<br/>
-								</p>
 								<h2>Top Categories</h2>
 								<ul>
 									<li>IN-BAY AUTOMATIC</li>
@@ -40,6 +32,7 @@
 									<li>BAY ACCESSORIES</li>
 								</ul>
 							</div>
+							<div id="left_menu_bottom" class="oe_structure col-md-12 mb16 mt16"/>
 						</div>
 						<div class="col-md-10">
 							<t t-raw="0"/>
