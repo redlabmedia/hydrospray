@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
 		<template id="assets_frontend" name="rlm_x1 assets" inherit_id="web.assets_frontend">
