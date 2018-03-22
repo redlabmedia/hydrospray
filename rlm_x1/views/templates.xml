@@ -12,7 +12,7 @@
 				<main>
 					<div class="row">
 						<div class="col-md-2">
-							<div id="left_menu_top" class="oe_structure col-md-12 mb16 mt16"/>
+							<div id="left_menu_top" class="oe_structure col-md-12 mb16 mt16">
 							<t t-set="category" t-value="0"/>
 							<t t-foreach="website.menu_id.child_id" t-as="x">
 								<t t-if="x.clean_url() == request.httprequest.path">
@@ -51,6 +51,7 @@
 									<li>SW4</li>
 								</ul>
 							</t>
+							</div>
 							<div class="col-md-12 mb16 mt16">
 								<h2>Top Categories</h2>
 								<ul>
