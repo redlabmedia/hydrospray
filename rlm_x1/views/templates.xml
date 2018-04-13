@@ -34,7 +34,7 @@
 									<t t-if="category == 'Car Wash'">
 										<!-- begin accordian menu -->
 										<style type="text/css">
-											.ac1 a { background-color:#999;}
+											.ac1 a { background-color:#999; color:#fff; }
 											.ac2 a { background-color:#aaa; text-indent:10px;}
 											.ac3 a { background-color:#ccc; text-indent:20px;}
 										  #accordion .glyphicon { margin-right:10px; }
