@@ -32,13 +32,121 @@
 										</t>
 									</t>
 									<t t-if="category == 'Car Wash'">
-										<h2>Car Wash Menu</h2>
-										<ul>
-											<li>CW1</li>
-											<li>CW2</li>
-											<li>CW3</li>
-											<li>CW4</li>
-										</ul>
+										<!-- begin accordian menu -->
+										<style type="text/css">
+											.ac1 a { background-color:#999;}
+											.ac2 a { background-color:#aaa; text-indent:10px;}
+											.ac3 a { background-color:#ccc; text-indent:20px;}
+										  #accordion .glyphicon { margin-right:10px; }
+										  .panel-collapse>.list-group .list-group-item:first-child {border-top-right-radius: 0;border-top-left-radius: 0;}
+										  .panel-collapse>.list-group .list-group-item {border-width: 1px 0;}
+										  .panel-collapse>.list-group {margin-bottom: 0;}
+										  .panel-collapse .list-group-item {border-radius:0;}
+
+										  .panel-collapse .list-group .list-group {margin: 0;margin-top: 10px;}
+										  .panel-collapse .list-group-item li.list-group-item {margin: 0 -15px;border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+										  .panel-collapse .list-group-item li.list-group-item:last-child {padding-bottom: 0;}
+
+										  .panel-collapse div.list-group div.list-group{margin: 0;}
+										  .panel-collapse div.list-group .list-group a.list-group-item {border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+										  .panel-collapse .list-group-item li.list-group-item {border-top: 1px solid #DDD !important;}
+		  
+										</style>
+										<div class="panel-group" id="accordion">
+			
+											<!-- begin LEVEL 1 -->
+											<div class="panel panel-default ac1"> 	
+												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse1A">SELF SERVE EQUIPMENT</a>              
+				
+													<!-- begin LEVEL 2 -->
+													<div id="collapse1A" class="panel-collapse collapse ac2">
+													  <a data-toggle="collapse" data-parent="#collapse1A" href="#collapse1B" class="list-group-item">COMPLETE SYSTEMS</a>
+					 
+														 <!-- begin LEVEL 3 -->
+														 <div id="collapse1B" class="panel-collapse collapse ac3">
+															<a href="#" class="list-group-item">ELITE PRO</a>
+															<a href="#" class="list-group-item">ELITE SERIES</a>
+															<a href="#" class="list-group-item">ELITE PLUS</a>
+															<a href="#" class="list-group-item">VALUE LINE</a>
+														  </div>  
+														  <!-- begin LEVEL 3 -->  
+				
+														<a data-toggle="collapse" data-parent="#collapse1A" href="#collapse1C" class="list-group-item">COMPONENTS</a>
+					 
+														 <!-- begin LEVEL 3 -->
+														 <div id="collapse1C" class="panel-collapse collapse ac3">
+															<a href="#" class="list-group-item">METER BOXES</a>
+															<a href="#" class="list-group-item">SIGNS</a>
+															<a href="#" class="list-group-item">BOOM & PACKAGES</a>
+															<a href="#" class="list-group-item">VACCUUMS</a>
+															<a href="#" class="list-group-item">WATER TREATMENT</a>
+															<a href="#" class="list-group-item">WATER RECLAIM</a>
+														  </div>  
+														  <!-- begin LEVEL 3 -->  
+													</div>
+													<!-- end LEVEL 2 -->
+					
+												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse2A">IN-BAY AUTOMATIC EQUIPMENT</a>              
+				
+													<!-- begin LEVEL 2 -->
+													<div id="collapse2A" class="panel-collapse collapse ac2">
+													  <a data-toggle="collapse" data-parent="#collapse2A" href="#collapse2B" class="list-group-item">COMPLETE SYSTEMS</a>
+					 
+														 <!-- begin LEVEL 3 -->
+														 <div id="collapse2B" class="panel-collapse collapse ac3">
+															<a href="#" class="list-group-item">RAINMAKER OEM</a>
+															<a href="#" class="list-group-item">CLASSIC OEM</a>
+															<a href="#" class="list-group-item">TURBO WASH OEM</a>
+															<a href="#" class="list-group-item">SABER</a>
+															<a href="#" class="list-group-item">KONDOR</a>
+															<a href="#" class="list-group-item">FREESTYLER</a>
+															<a href="#" class="list-group-item">CUBE</a>
+														  </div>  
+														  <!-- begin LEVEL 3 -->  
+				
+														<a data-toggle="collapse" data-parent="#collapse2A" href="#collapse2C" class="list-group-item">COMPONENTS</a>
+					 
+														 <!-- begin LEVEL 3 -->
+														 <div id="collapse2C" class="panel-collapse collapse ac3">
+															<a href="#" class="list-group-item">DRYERS</a>
+															<a href="#" class="list-group-item">DOORS</a>
+															<a href="#" class="list-group-item">PAYSTATIONS</a>
+															<a href="#" class="list-group-item">WATER TREATMENT</a>
+															<a href="#" class="list-group-item">WATER RECLAIM</a>
+															<a href="#" class="list-group-item">POS SYSTEMS</a>
+															<a href="#" class="list-group-item">VACCUUMS</a>
+														  </div>  
+														  <!-- begin LEVEL 3 -->  
+													</div>
+													<!-- end LEVEL 2 -->
+					
+												 <a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse3A">CONVEYORIZED TUNNEL SYSTEM</a>              
+				
+													<!-- begin LEVEL 2 -->
+													<div id="collapse3A" class="panel-collapse collapse ac2">
+													  <a data-toggle="collapse" data-parent="#collapse3A" href="#collapse3B" class="list-group-item">COMPLETE SYSTEMS</a>
+					 
+														 <!-- begin LEVEL 3 -->
+														 <div id="collapse3B" class="panel-collapse collapse ac3">
+															<a href="#" class="list-group-item">SPIN-LITE</a>
+															<a href="#" class="list-group-item">SIGNATURE SERIES</a>
+															<a href="#" class="list-group-item">PRO CLASS 100</a>
+															<a href="#" class="list-group-item">ENDURO CLASS 60</a>
+														  </div>  
+														  <!-- begin LEVEL 3 -->  
+				
+														<a href="#" class="list-group-item">COMPONENTS</a>
+					 
+													</div>
+													<!-- end LEVEL 2 -->
+				
+												<a class="list-group-item" href="#">CHEMICALS</a>              
+
+											</div>
+											<!-- end LEVEL 1 -->
+			
+										  </div>
+										<!-- end accordian menu -->
 									</t>
 									<t t-if="category == 'Pressure Wash'">
 										<h2>Pressure Wash Menu</h2>
