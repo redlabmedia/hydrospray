@@ -580,4 +580,38 @@
 			</div>
 		</xpath>
 	</template>
+	<template id="rlm_text_video" inherit_id="website.snippets" name="Text-Video">
+		<xpath expr="//div[@id='snippet_content']/div[hasclass('o_panel_body')]" position="inside">
+			<div>
+				<div class="oe_snippet_thumbnail">
+					<img class="oe_snippet_thumbnail_img" src="/rlm_x1/static/src/img/ui/block_text_video.png"/>
+					<span class="oe_snippet_thumbnail_title">Text-Video</span>
+				</div>
+				 <section class="oe_snippet_body s_text_video mb0">
+                    <div class="container">
+                        <div class="row">
+                            <div class="mt0 col-md-12 mb0">
+                                <h1>Category Name</h1>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mt0 col-md-5 mb0">
+                                <p>Write one or two paragraphs describing your product. To be successful your content needs to be useful to start with the customer – find out what they want and give it to them.</p>
+                                <p>Write one or two paragraphs describing your product. To be successful your content needs to be useful to start with the customer – find out what they want and give it to them.</p>
+                                <p>Write one or two paragraphs describing your product. To be successful your content needs to be useful to start with the customer – find out what they want and give it to them.</p>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="media_iframe_video" data-oe-expression="//www.youtube.com/embed/s8VIOzUs1ZM?autoplay=0">
+                                    <div class="css_editable_mode_display" data-original-title="" title="">&amp;nbsp;</div>
+                                    <div class="media_iframe_video_size">&amp;nbsp;</div>
+                                    <iframe src="//www.youtube.com/embed/s8VIOzUs1ZM?autoplay=0" frameborder="0"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                </section>
+			</div>
+		</xpath>
+	</template>
 </odoo>
