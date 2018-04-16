@@ -602,8 +602,8 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="media_iframe_video" data-oe-expression="//www.youtube.com/embed/s8VIOzUs1ZM?autoplay=0">
-                                    <div class="css_editable_mode_display" data-original-title="" title="">&amp;nbsp;</div>
-                                    <div class="media_iframe_video_size">&amp;nbsp;</div>
+                                    <div class="css_editable_mode_display" data-original-title="" title="">&nbsp;</div>
+                                    <div class="media_iframe_video_size">&nbsp;</div>
                                     <iframe src="//www.youtube.com/embed/s8VIOzUs1ZM?autoplay=0" frameborder="0"/>
                                 </div>
                             </div>
