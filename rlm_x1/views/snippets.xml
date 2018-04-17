@@ -601,11 +601,7 @@
                                 <p>Write one or two paragraphs describing your product. To be successful your content needs to be useful to start with the customer – find out what they want and give it to them.</p>
                             </div>
                             <div class="col-md-7">
-                                <div class="media_iframe_video" data-oe-expression="//www.youtube.com/embed/s8VIOzUs1ZM?autoplay=0">
-                                    <div class="css_editable_mode_display" data-original-title="" title=""/>
-                                    <div class="media_iframe_video_size"/>
-                                    <iframe src="//www.youtube.com/embed/s8VIOzUs1ZM?autoplay=0" frameborder="0"/>
-                                </div>
+                                <img src="/rlm_x1/static/src/img/video-image.jpg" alt="video image"/>
                             </div>
                         </div>
                     </div>
