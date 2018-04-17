@@ -150,23 +150,24 @@
 									</t>
 								</div>
 								<div class="col-md-12 mb16 mt16">
-									<h2>Top Categories</h2>
-									<ul>
-										<li>IN-BAY AUTOMATIC</li>
-										<li>TUNNEL WASH</li>
-										<li>SELF SERVE</li>
-										<li>FLEET WASH</li>
-										<li>MOBILE WASH</li>
-										<li>CHEMICALS</li>
-										<li>WATER TREATMENT</li>
-										<li>METERBOXES</li>
-										<li>POS SYSTEMS</li>
-										<li>PAY STATIONS</li>
-										<li>CHANGE MACHINES</li>
-										<li>SIGNS &amp; CANOPIES</li>
-										<li>BAY ACCESSORIES</li>
+									<h3>Top Categories</h3>
+									<ul style="border:1px solid #eee;">
+									   	<li><span class="dot"></span>In-Bay Automatic</li>
+										<li><span class="dot"></span>Tunnel Wash</li>
+										<li><span class="dot"></span>Self Serve</li>
+										<li><span class="dot"></span>Fleet Wash</li>
+										<li><span class="dot"></span>Mobile Wash</li>
+										<li><span class="dot"></span>Chemicals</li>
+										<li><span class="dot"></span>Water Treatment</li>
+										<li><span class="dot"></span>Meterboxes</li>
+										<li><span class="dot"></span>Pos Systems</li>
+										<li><span class="dot"></span>Pay Stations</li>
+										<li><span class="dot"></span>Change Machines</li>
+										<li><span class="dot"></span>Signs &amp; Canopies</li>
+										<li><span class="dot"></span>Bay Accessories</li>
 									</ul>
 								</div>
+								
 								<div id="left_menu_bottom" class="oe_structure col-md-12 mb16 mt16"/>
 							</div>
 							<div class="col-md-9">
