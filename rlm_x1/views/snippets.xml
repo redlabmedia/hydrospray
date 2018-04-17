@@ -601,7 +601,7 @@
                                 <p>Write one or two paragraphs describing your product. To be successful your content needs to be useful to start with the customer – find out what they want and give it to them.</p>
                             </div>
                             <div class="col-md-7">
-                                <img src="/rlm_x1/static/src/img/video-image.jpg" alt="video image"/>
+                                <img style="max-width:90%;" src="/rlm_x1/static/src/img/video-image.jpg" alt="video image"/>
                             </div>
                         </div>
                     </div>
