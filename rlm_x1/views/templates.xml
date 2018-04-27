@@ -10,7 +10,6 @@
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/rlm_x1/static/src/js/custom1.js"></script>
             </xpath>
-
         </template>
 		<template inherit_id="portal.frontend_layout" name="rlm_x1 Custom Menu Left" id="rlm_x1_custom_menu_left">
 			<xpath expr="//main" position="replace">
@@ -189,5 +188,38 @@
 				</main>
 			</xpath>
 		</template>
+		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="web.submenu">
+            <xpath expr="." position="replace">
+                <li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+					<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
+						<span t-field="submenu.name"/>
+					</a>
+				</li>
+				<li t-if="submenu.child_id" t-attf-class="dropdown #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<span t-field="submenu.name"/> <span class="caret" t-ignore="true"/>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<t t-foreach="submenu.child_id" t-as="submenu">
+							<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+								<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
+									<span t-field="submenu.name"/>
+								</a>
+							</li>
+							<li t-if="submenu.child_id" t-attf-class="dropdown dropdown-submenu #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+									<span t-field="submenu.name"/> <span class="caret" t-ignore="true"/>
+								</a>
+								<ul class="dropdown-menu" role="menu">
+									<t t-foreach="submenu.child_id" t-as="submenu">
+										<t t-call="website.submenu"/>
+									</t>
+								</ul>
+							</li>
+						</t>
+					</ul>
+				</li>
+            </xpath>
+        </template>
 	</data>
 </odoo>
