@@ -27,9 +27,6 @@
         'views/templates.xml',
         'views/snippets.xml',
     ],
-    'js': [
-        'static/src/js/custom1.js'
-    ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',

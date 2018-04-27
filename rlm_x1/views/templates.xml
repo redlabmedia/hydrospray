@@ -4,9 +4,14 @@
 			<xpath expr="." position="inside">
 				<link rel="stylesheet" href="/rlm_x1/static/src/less/rlm_x1.less"/>
 				<link rel="stylesheet" href="/rlm_x1/static/src/less/custom1.less"/>
-				<script type="text/javascript" src="/rlm_x1/static/src/js/custom1.js"/>
 			</xpath>
 		</template>
+		<template id="assets_backended" name="rlm_x1 backassets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/rlm_x1/static/src/js/custom1.js"></script>
+            </xpath>
+
+        </template>
 		<template inherit_id="portal.frontend_layout" name="rlm_x1 Custom Menu Left" id="rlm_x1_custom_menu_left">
 			<xpath expr="//main" position="replace">
 				<main>
