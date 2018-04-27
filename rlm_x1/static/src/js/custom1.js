@@ -1,5 +1,5 @@
 /* insert custom javascript here */
-openerp.new_module = function(instance){
+odoo.new_module = function(instance){
     var module = instance.website // loading the namespace of the 'sample' module
 
     module.website.contentMenu.EditMenuDialog.include({
