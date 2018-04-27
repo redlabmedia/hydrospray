@@ -1,8 +1,6 @@
 /* insert custom javascript here */
-odoo.new_module = function(instance){
-    var module = instance.website // loading the namespace of the 'sample' module
-
-    module.website.contentMenu.EditMenuDialog.include({
+odoo.rlm_x1 = function(instance){
+    instance.website.contentMenu.EditMenuDialog.include({
         start: function () {
             var r = this._super.apply(this, arguments);
             this.$('.oe_menu_editor').nestedSortable({
