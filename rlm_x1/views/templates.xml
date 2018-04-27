@@ -188,7 +188,7 @@
 				</main>
 			</xpath>
 		</template>
-		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="web.submenu">
+		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="website.submenu">
             <xpath expr="." position="replace">
                 <li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
 					<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
