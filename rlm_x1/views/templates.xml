@@ -31,7 +31,7 @@
 											</t>
 										</t>
 									</t>
-									<t t-if="category.startswith('Fi')">
+									
 									<t t-if="category == 'Car Wash'">
 										<!-- begin accordian menu -->
 										
