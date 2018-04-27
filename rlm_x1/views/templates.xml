@@ -6,7 +6,7 @@
 				<link rel="stylesheet" href="/rlm_x1/static/src/less/custom1.less"/>
 			</xpath>
 		</template>
-		<template id="assets_backended" name="rlm_x1 backassets" inherit_id="web.assets_backend">
+		<template id="assets_backended" name="rlm_x1 backassets" inherit_id="web.assets_editor">
             <xpath expr="." position="inside">
                 <script type="text/javascript" src="/rlm_x1/static/src/js/custom1.js"></script>
             </xpath>
