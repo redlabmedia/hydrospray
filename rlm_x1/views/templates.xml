@@ -7,10 +7,10 @@
 			</xpath>
 		</template>
 		<template id="assets_backended" name="rlm_x1 backassets" inherit_id="web.assets_common">
-            <xpath expr="." position="inside">
-                <script type="text/javascript" src="/rlm_x1/static/src/js/custom1.js"></script>
-            </xpath>
-        </template>
+			<xpath expr="." position="inside">
+				<script type="text/javascript" src="/rlm_x1/static/src/js/custom1.js"/>
+			</xpath>
+		</template>
 		<template inherit_id="portal.frontend_layout" name="rlm_x1 Custom Menu Left" id="rlm_x1_custom_menu_left">
 			<xpath expr="//main" position="replace">
 				<main>
@@ -25,114 +25,108 @@
 							<div class="col-md-3">
 								<div id="left_menu_top" class="oe_structure col-md-12 mb16 mt16">
 									<t t-set="category" t-value="0"/>
+									<t t-set="tUrl" t-value="0"/>
 									<t t-foreach="website.menu_id.child_id" t-as="x">
-										<t t-if="x.clean_url() == request.httprequest.path">
-											<t t-set="category" t-value="x.name"/>
-										</t>
+										<t t-set="category" t-value="x.name"/>
+										<t t-set="tUrl" t-value="x.url"/>
+										<li t-att-class="         'active' if x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url()) else None         ">
+											<a t-att-href="x.clean_url()" t-ignore="true" t-att-target="'_blank' if x.new_window else None">
+												<span t-field="x.name"/>
+											</a>
+										</li>
 										<t t-foreach="x.child_id" t-as="y">
-											<t t-if="y.clean_url() == request.httprequest.path">
-												<t t-set="category" t-value="y.parent_id.name"/>
+											<t t-set="category" t-value="y.parent_id.name"/>
+											<t t-set="tUrl" t-value="y.parent_id.url"/>
+											<li t-att-class="         'active' if y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url()) else None         ">
+        								- <a t-att-href="y.clean_url()" t-ignore="true" t-att-target="'_blank' if y.new_window else None"><span t-field="y.name"/></a>
+        							</li>
+											<t t-foreach="y.child_id" t-as="z">
+												<t t-set="category" t-value="z.parent_id.name"/>
+												<t t-set="tUrl" t-value="z.parent_id.url"/>
+												<li t-att-class="         'active' if z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url()) else None         ">
+        								- - <a t-att-href="z.clean_url()" t-ignore="true" t-att-target="'_blank' if z.new_window else None"><span t-field="z.name"/></a>
+        							</li>
 											</t>
 										</t>
 									</t>
-									
 									<t t-if="category == 'Car Wash'">
 										<!-- begin accordian menu -->
-										
 										<div class="panel-group" id="accordion">
-			
 											<!-- begin LEVEL 1 -->
-											<div class="panel panel-default ac1"> 	
-												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse1A">SELF SERVE EQUIPMENT</a>              
-				
-													<!-- begin LEVEL 2 -->
-													<div id="collapse1A" class="panel-collapse collapse ac2">
-													  <a data-toggle="collapse" data-parent="#collapse1A" href="#collapse1B" class="list-group-item">COMPLETE SYSTEMS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse1B" class="panel-collapse collapse ac3">
-															<a href="/elite-pro" class="list-group-item">ELITE PRO</a>
-															<a href="/elite-series-self-serve-system" class="list-group-item">ELITE SERIES</a>
-															<a href="/elite-plus" class="list-group-item">ELITE PLUS</a>
-															<a href="/value-line" class="list-group-item">VALUE LINE</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
-				
-														<a data-toggle="collapse" data-parent="#collapse1A" href="#collapse1C" class="list-group-item">COMPONENTS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse1C" class="panel-collapse collapse ac3">
-															<a href="/meter-boxes-1" class="list-group-item">METER BOXES</a>
-															<a href="/signs" class="list-group-item">SIGNS</a>
-															<a href="/booms" class="list-group-item">BOOM &amp; PACKAGES</a>
-															<a href="/vacuums" class="list-group-item">VACCUUMS</a>
-															<a href="/water-treatment" class="list-group-item">WATER TREATMENT</a>
-															<a href="/water-reclaim" class="list-group-item">WATER RECLAIM</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
+											<div class="panel panel-default ac1">
+												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse1A">SELF SERVE EQUIPMENT</a>
+												<!-- begin LEVEL 2 -->
+												<div id="collapse1A" class="panel-collapse collapse ac2">
+													<a data-toggle="collapse" data-parent="#collapse1A" href="#collapse1B" class="list-group-item">COMPLETE SYSTEMS</a>
+													<!-- begin LEVEL 3 -->
+													<div id="collapse1B" class="panel-collapse collapse ac3">
+														<a href="/elite-pro" class="list-group-item">ELITE PRO</a>
+														<a href="/elite-series-self-serve-system" class="list-group-item">ELITE SERIES</a>
+														<a href="/elite-plus" class="list-group-item">ELITE PLUS</a>
+														<a href="/value-line" class="list-group-item">VALUE LINE</a>
 													</div>
-													<!-- end LEVEL 2 -->
-					
-												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse2A">IN-BAY AUTOMATICS</a>              
-				
-													<!-- begin LEVEL 2 -->
-													<div id="collapse2A" class="panel-collapse collapse ac2">
-													  <a data-toggle="collapse" data-parent="#collapse2A" href="#collapse2B" class="list-group-item">COMPLETE SYSTEMS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse2B" class="panel-collapse collapse ac3">
-															<a href="/rainmaker-touch-free-automatic" class="list-group-item">RAINMAKER OEM</a>
-															<a href="/classic-touch-free-automatic" class="list-group-item">CLASSIC OEM</a>
-															<a href="/turbowash-automatic" class="list-group-item">TURBOWASH OEM</a>
-															<a href="/saber" class="list-group-item">SABER</a>
-															<a href="/kondor" class="list-group-item">KONDOR</a>
-															<a href="/freestyler" class="list-group-item">FREESTYLER</a>
-															<a href="/cube" class="list-group-item">CUBE</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
-				
-														<a data-toggle="collapse" data-parent="#collapse2A" href="#collapse2C" class="list-group-item">COMPONENTS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse2C" class="panel-collapse collapse ac3">
-															<a href="/dryers" class="list-group-item">DRYERS</a>
-															<a href="/doors" class="list-group-item">DOORS</a>
-															<a href="/paystations" class="list-group-item">PAYSTATIONS</a>
-															<a href="/water-treatment" class="list-group-item">WATER TREATMENT</a>
-															<a href="/water-reclaim" class="list-group-item">WATER RECLAIM</a>
-															<a href="/pos-systems" class="list-group-item">POS SYSTEMS</a>
-															<a href="/vacuums" class="list-group-item">VACCUUMS</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
+													<!-- begin LEVEL 3 -->
+													<a data-toggle="collapse" data-parent="#collapse1A" href="#collapse1C" class="list-group-item">COMPONENTS</a>
+													<!-- begin LEVEL 3 -->
+													<div id="collapse1C" class="panel-collapse collapse ac3">
+														<a href="/meter-boxes-1" class="list-group-item">METER BOXES</a>
+														<a href="/signs" class="list-group-item">SIGNS</a>
+														<a href="/booms" class="list-group-item">BOOM &amp; PACKAGES</a>
+														<a href="/vacuums" class="list-group-item">VACCUUMS</a>
+														<a href="/water-treatment" class="list-group-item">WATER TREATMENT</a>
+														<a href="/water-reclaim" class="list-group-item">WATER RECLAIM</a>
 													</div>
-													<!-- end LEVEL 2 -->
-					
-												 <a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse3A">CONVEYORIZED TUNNEL SYSTEM</a>              
-				
-													<!-- begin LEVEL 2 -->
-													<div id="collapse3A" class="panel-collapse collapse ac2">
-													  <a data-toggle="collapse" data-parent="#collapse3A" href="#collapse3B" class="list-group-item">COMPLETE SYSTEMS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse3B" class="panel-collapse collapse ac3">
-															<a href="/spinlite" class="list-group-item">SPIN-LITE</a>
-															<a href="/signature-series" class="list-group-item">SIGNATURE SERIES</a>
-															<a href="/pro-class-100" class="list-group-item">PRO CLASS 100</a>
-															<a href="/enduro-class-60" class="list-group-item">ENDURO CLASS 60</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
-				
-														<a href="#" class="list-group-item">COMPONENTS</a>
-					 
+													<!-- begin LEVEL 3 -->
+												</div>
+												<!-- end LEVEL 2 -->
+												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse2A">IN-BAY AUTOMATICS</a>
+												<!-- begin LEVEL 2 -->
+												<div id="collapse2A" class="panel-collapse collapse ac2">
+													<a data-toggle="collapse" data-parent="#collapse2A" href="#collapse2B" class="list-group-item">COMPLETE SYSTEMS</a>
+													<!-- begin LEVEL 3 -->
+													<div id="collapse2B" class="panel-collapse collapse ac3">
+														<a href="/rainmaker-touch-free-automatic" class="list-group-item">RAINMAKER OEM</a>
+														<a href="/classic-touch-free-automatic" class="list-group-item">CLASSIC OEM</a>
+														<a href="/turbowash-automatic" class="list-group-item">TURBOWASH OEM</a>
+														<a href="/saber" class="list-group-item">SABER</a>
+														<a href="/kondor" class="list-group-item">KONDOR</a>
+														<a href="/freestyler" class="list-group-item">FREESTYLER</a>
+														<a href="/cube" class="list-group-item">CUBE</a>
 													</div>
-													<!-- end LEVEL 2 -->
-				
-												<a class="list-group-item" href="/chemicals-self-serve">CHEMICALS</a>              
-
+													<!-- begin LEVEL 3 -->
+													<a data-toggle="collapse" data-parent="#collapse2A" href="#collapse2C" class="list-group-item">COMPONENTS</a>
+													<!-- begin LEVEL 3 -->
+													<div id="collapse2C" class="panel-collapse collapse ac3">
+														<a href="/dryers" class="list-group-item">DRYERS</a>
+														<a href="/doors" class="list-group-item">DOORS</a>
+														<a href="/paystations" class="list-group-item">PAYSTATIONS</a>
+														<a href="/water-treatment" class="list-group-item">WATER TREATMENT</a>
+														<a href="/water-reclaim" class="list-group-item">WATER RECLAIM</a>
+														<a href="/pos-systems" class="list-group-item">POS SYSTEMS</a>
+														<a href="/vacuums" class="list-group-item">VACCUUMS</a>
+													</div>
+													<!-- begin LEVEL 3 -->
+												</div>
+												<!-- end LEVEL 2 -->
+												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse3A">CONVEYORIZED TUNNEL SYSTEM</a>
+												<!-- begin LEVEL 2 -->
+												<div id="collapse3A" class="panel-collapse collapse ac2">
+													<a data-toggle="collapse" data-parent="#collapse3A" href="#collapse3B" class="list-group-item">COMPLETE SYSTEMS</a>
+													<!-- begin LEVEL 3 -->
+													<div id="collapse3B" class="panel-collapse collapse ac3">
+														<a href="/spinlite" class="list-group-item">SPIN-LITE</a>
+														<a href="/signature-series" class="list-group-item">SIGNATURE SERIES</a>
+														<a href="/pro-class-100" class="list-group-item">PRO CLASS 100</a>
+														<a href="/enduro-class-60" class="list-group-item">ENDURO CLASS 60</a>
+													</div>
+													<!-- begin LEVEL 3 -->
+													<a href="#" class="list-group-item">COMPONENTS</a>
+												</div>
+												<!-- end LEVEL 2 -->
+												<a class="list-group-item" href="/chemicals-self-serve">CHEMICALS</a>
 											</div>
 											<!-- end LEVEL 1 -->
-			
-										  </div>
+										</div>
 										<!-- end accordian menu -->
 									</t>
 									<t t-if="category == 'Pressure Wash'">
@@ -157,22 +151,21 @@
 								<div class="col-md-12 mb16 mt16 topcat">
 									<h3>Top Categories</h3>
 									<ul style="border:1px solid #eee;">
-									   	<li><span class="dot"></span>In-Bay Automatic</li>
-										<li><span class="dot"></span>Tunnel Wash</li>
-										<li><span class="dot"></span>Self Serve</li>
-										<li><span class="dot"></span>Fleet Wash</li>
-										<li><span class="dot"></span>Mobile Wash</li>
-										<li><span class="dot"></span>Chemicals</li>
-										<li><span class="dot"></span>Water Treatment</li>
-										<li><span class="dot"></span>Meterboxes</li>
-										<li><span class="dot"></span>Pos Systems</li>
-										<li><span class="dot"></span>Pay Stations</li>
-										<li><span class="dot"></span>Change Machines</li>
-										<li><span class="dot"></span>Signs &amp; Canopies</li>
-										<li><span class="dot"></span>Bay Accessories</li>
+										<li><span class="dot"/>In-Bay Automatic</li>
+										<li><span class="dot"/>Tunnel Wash</li>
+										<li><span class="dot"/>Self Serve</li>
+										<li><span class="dot"/>Fleet Wash</li>
+										<li><span class="dot"/>Mobile Wash</li>
+										<li><span class="dot"/>Chemicals</li>
+										<li><span class="dot"/>Water Treatment</li>
+										<li><span class="dot"/>Meterboxes</li>
+										<li><span class="dot"/>Pos Systems</li>
+										<li><span class="dot"/>Pay Stations</li>
+										<li><span class="dot"/>Change Machines</li>
+										<li><span class="dot"/>Signs &amp; Canopies</li>
+										<li><span class="dot"/>Bay Accessories</li>
 									</ul>
 								</div>
-								
 								<div id="left_menu_bottom" class="oe_structure col-md-12 mb16 mt16"/>
 							</div>
 							<div class="col-md-9">
@@ -189,39 +182,41 @@
 			</xpath>
 		</template>
 		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="website.submenu">
-            <xpath expr="." position="replace">
-              <t name="Submenu" t-name="website.submenu">
-                <li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
-					<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
-						<span t-field="submenu.name"/>
-					</a>
-				</li>
-				<li t-if="submenu.child_id" t-attf-class="dropdown #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
-					<a class="dropdown-toggle" t-att-href="submenu.clean_url()">
-						<span t-field="submenu.name"/> <span class="caret" t-ignore="true"/>
-					</a>
-					<ul class="dropdown-menu" role="menu">
-						<t t-foreach="submenu.child_id" t-as="submenu">
-							<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
-								<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
-									<span t-field="submenu.name"/>
-								</a>
-							</li>
-							<li t-if="submenu.child_id" t-attf-class="dropdown dropdown-submenu #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
-								<a class="dropdown-toggle"  t-att-href="submenu.clean_url()">
-									<span t-field="submenu.name"/> <span class="caret" t-ignore="true"/>
-								</a>
-								<ul class="dropdown-menu" role="menu">
-									<t t-foreach="submenu.child_id" t-as="submenu">
-										<t t-call="website.submenu"/>
-									</t>
-								</ul>
-							</li>
-						</t>
-					</ul>
-				</li>
+			<xpath expr="." position="replace">
+				<t name="Submenu" t-name="rlm_x1.submenu_extend">
+					<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+						<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
+							<span t-field="submenu.name"/>
+						</a>
+					</li>
+					<li t-if="submenu.child_id" t-attf-class="dropdown #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
+						<a class="dropdown-toggle" t-att-href="submenu.clean_url()">
+							<span t-field="submenu.name"/>
+							<span class="caret" t-ignore="true"/>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<t t-foreach="submenu.child_id" t-as="submenu">
+								<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+									<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
+										<span t-field="submenu.name"/>
+									</a>
+								</li>
+								<li t-if="submenu.child_id" t-attf-class="dropdown dropdown-submenu #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
+									<a class="dropdown-toggle" t-att-href="submenu.clean_url()">
+										<span t-field="submenu.name"/>
+										<span class="caret" t-ignore="true"/>
+									</a>
+									<ul class="dropdown-menu" role="menu">
+										<t t-foreach="submenu.child_id" t-as="submenu">
+											<t t-call="rlm_x1.submenu_extend"/>
+										</t>
+									</ul>
+								</li>
+							</t>
+						</ul>
+					</li>
 				</t>
-            </xpath>
-        </template>
+			</xpath>
+		</template>
 	</data>
 </odoo>
