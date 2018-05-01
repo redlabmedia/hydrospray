@@ -1,9 +1,14 @@
+<?xml version="1.0"?>
 <odoo>
 	<data>
 		<template id="assets_frontend" name="rlm_x1 assets" inherit_id="web.assets_frontend">
 			<xpath expr="." position="inside">
 				<link rel="stylesheet" href="/rlm_x1/static/src/less/rlm_x1.less"/>
 				<link rel="stylesheet" href="/rlm_x1/static/src/less/custom1.less"/>
+			</xpath>
+		</template>
+		<template id="assets_backended" name="rlm_x1 backassets" inherit_id="web.assets_common">
+			<xpath expr="." position="inside">
 				<script type="text/javascript" src="/rlm_x1/static/src/js/custom1.js"/>
 			</xpath>
 		</template>
@@ -20,155 +25,81 @@
 						<t t-if="current_page != 'Home'">
 							<div class="col-md-3">
 								<div id="left_menu_top" class="oe_structure col-md-12 mb16 mt16">
-									<t t-set="category" t-value="0"/>
-									<t t-foreach="website.menu_id.child_id" t-as="x">
-										<t t-if="x.clean_url() == request.httprequest.path">
-											<t t-set="category" t-value="x.name"/>
-										</t>
-										<t t-foreach="x.child_id" t-as="y">
-											<t t-if="y.clean_url() == request.httprequest.path">
-												<t t-set="category" t-value="y.parent_id.name"/>
+									<!-- cycle through menu backwards -->
+									<t t-set="path_item" t-value="request.env['website.menu'].search([('url', '=', request.httprequest.path)], limit=1)"/>
+									<!-- Parents -->
+									<t t-set="path_count" t-value="0"/>
+									<t t-set="path_id" t-value="0"/>
+									<t t-foreach="path_item.get_parents(True)" t-as="step">
+										<t t-set="path_count" t-value="path_count+1"/>
+										<t t-if="path_count == 2">
+											<t t-foreach="step.child_id" t-as="x">
+												<ul t-att-id="x.id" style="display:none;">
+													<t t-if="x.child_id">
+														<li t-att-class="         'active' if x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url()) else None         ">
+															<a t-att-href="x.clean_url()" t-ignore="true" t-att-target="'_blank' if x.new_window else None">
+																<span t-field="x.name"/>
+															</a>
+														</li>
+														<t t-if="x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url())">
+															<script type="text/javascript">
+  													    $( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+  													  </script>
+														</t>
+													</t>
+													<t t-foreach="x.child_id" t-as="y">
+														<li t-att-class="         'active' if y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url()) else None         ">
+            											- <a t-att-href="y.clean_url()" t-ignore="true" t-att-target="'_blank' if y.new_window else None"><span t-field="y.name"/></a>
+            										</li>
+														<t t-if="y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url())">
+															<script type="text/javascript">
+      													    $( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+      													  </script>
+														</t>
+														<t t-foreach="y.child_id" t-as="z">
+															<li t-att-class="         'active' if z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url()) else None         ">
+            												- - <a t-att-href="z.clean_url()" t-ignore="true" t-att-target="'_blank' if z.new_window else None"><span t-field="z.name"/></a>
+            											</li>
+															<t t-if="z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url())">
+																<script type="text/javascript">
+        													    $( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+        													  </script>
+															</t>
+															<t t-foreach="z.child_id" t-as="q">
+																<li t-att-class="         'active' if q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url()) else None         ">
+            													- - - <a t-att-href="q.clean_url()" t-ignore="true" t-att-target="'_blank' if q.new_window else None"><span t-field="q.name"/></a>
+            												</li>
+																<t t-if="q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url())">
+																	<script type="text/javascript">
+          													    $( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+          													  </script>
+																</t>
+															</t>
+														</t>
+													</t>
+												</ul>
 											</t>
 										</t>
-									</t>
-									<t t-if="category == 'Car Wash'">
-										<!-- begin accordian menu -->
-										
-										<div class="panel-group" id="accordion">
-			
-											<!-- begin LEVEL 1 -->
-											<div class="panel panel-default ac1"> 	
-												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse1A">SELF SERVE EQUIPMENT</a>              
-				
-													<!-- begin LEVEL 2 -->
-													<div id="collapse1A" class="panel-collapse collapse ac2">
-													  <a data-toggle="collapse" data-parent="#collapse1A" href="#collapse1B" class="list-group-item">COMPLETE SYSTEMS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse1B" class="panel-collapse collapse ac3">
-															<a href="#" class="list-group-item">ELITE PRO</a>
-															<a href="#" class="list-group-item">ELITE SERIES</a>
-															<a href="#" class="list-group-item">ELITE PLUS</a>
-															<a href="#" class="list-group-item">VALUE LINE</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
-				
-														<a data-toggle="collapse" data-parent="#collapse1A" href="#collapse1C" class="list-group-item">COMPONENTS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse1C" class="panel-collapse collapse ac3">
-															<a href="#" class="list-group-item">METER BOXES</a>
-															<a href="#" class="list-group-item">SIGNS</a>
-															<a href="#" class="list-group-item">BOOM &amp; PACKAGES</a>
-															<a href="#" class="list-group-item">VACCUUMS</a>
-															<a href="#" class="list-group-item">WATER TREATMENT</a>
-															<a href="#" class="list-group-item">WATER RECLAIM</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
-													</div>
-													<!-- end LEVEL 2 -->
-					
-												<a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse2A">IN-BAY AUTOMATIC EQUIPMENT</a>              
-				
-													<!-- begin LEVEL 2 -->
-													<div id="collapse2A" class="panel-collapse collapse ac2">
-													  <a data-toggle="collapse" data-parent="#collapse2A" href="#collapse2B" class="list-group-item">COMPLETE SYSTEMS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse2B" class="panel-collapse collapse ac3">
-															<a href="#" class="list-group-item">RAINMAKER OEM</a>
-															<a href="#" class="list-group-item">CLASSIC OEM</a>
-															<a href="#" class="list-group-item">TURBO WASH OEM</a>
-															<a href="#" class="list-group-item">SABER</a>
-															<a href="#" class="list-group-item">KONDOR</a>
-															<a href="#" class="list-group-item">FREESTYLER</a>
-															<a href="#" class="list-group-item">CUBE</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
-				
-														<a data-toggle="collapse" data-parent="#collapse2A" href="#collapse2C" class="list-group-item">COMPONENTS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse2C" class="panel-collapse collapse ac3">
-															<a href="#" class="list-group-item">DRYERS</a>
-															<a href="#" class="list-group-item">DOORS</a>
-															<a href="#" class="list-group-item">PAYSTATIONS</a>
-															<a href="#" class="list-group-item">WATER TREATMENT</a>
-															<a href="#" class="list-group-item">WATER RECLAIM</a>
-															<a href="#" class="list-group-item">POS SYSTEMS</a>
-															<a href="#" class="list-group-item">VACCUUMS</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
-													</div>
-													<!-- end LEVEL 2 -->
-					
-												 <a class="list-group-item" data-toggle="collapse" data-parent="#accordion" href="#collapse3A">CONVEYORIZED TUNNEL SYSTEM</a>              
-				
-													<!-- begin LEVEL 2 -->
-													<div id="collapse3A" class="panel-collapse collapse ac2">
-													  <a data-toggle="collapse" data-parent="#collapse3A" href="#collapse3B" class="list-group-item">COMPLETE SYSTEMS</a>
-					 
-														 <!-- begin LEVEL 3 -->
-														 <div id="collapse3B" class="panel-collapse collapse ac3">
-															<a href="#" class="list-group-item">SPIN-LITE</a>
-															<a href="#" class="list-group-item">SIGNATURE SERIES</a>
-															<a href="#" class="list-group-item">PRO CLASS 100</a>
-															<a href="#" class="list-group-item">ENDURO CLASS 60</a>
-														  </div>  
-														  <!-- begin LEVEL 3 -->  
-				
-														<a href="#" class="list-group-item">COMPONENTS</a>
-					 
-													</div>
-													<!-- end LEVEL 2 -->
-				
-												<a class="list-group-item" href="#">CHEMICALS</a>              
-
-											</div>
-											<!-- end LEVEL 1 -->
-			
-										  </div>
-										<!-- end accordian menu -->
-									</t>
-									<t t-if="category == 'Pressure Wash'">
-										<h2>Pressure Wash Menu</h2>
-										<ul>
-											<li>pW1</li>
-											<li>pW2</li>
-											<li>pW3</li>
-											<li>pW4</li>
-										</ul>
-									</t>
-									<t t-if="category == 'Support'">
-										<h2>Support Menu</h2>
-										<ul>
-											<li>SW1</li>
-											<li>SW2</li>
-											<li>SW3</li>
-											<li>SW4</li>
-										</ul>
 									</t>
 								</div>
 								<div class="col-md-12 mb16 mt16 topcat">
 									<h3>Top Categories</h3>
 									<ul style="border:1px solid #eee;">
-									   	<li><span class="dot"></span>In-Bay Automatic</li>
-										<li><span class="dot"></span>Tunnel Wash</li>
-										<li><span class="dot"></span>Self Serve</li>
-										<li><span class="dot"></span>Fleet Wash</li>
-										<li><span class="dot"></span>Mobile Wash</li>
-										<li><span class="dot"></span>Chemicals</li>
-										<li><span class="dot"></span>Water Treatment</li>
-										<li><span class="dot"></span>Meterboxes</li>
-										<li><span class="dot"></span>Pos Systems</li>
-										<li><span class="dot"></span>Pay Stations</li>
-										<li><span class="dot"></span>Change Machines</li>
-										<li><span class="dot"></span>Signs &amp; Canopies</li>
-										<li><span class="dot"></span>Bay Accessories</li>
+										<li><span class="dot"/>In-Bay Automatic</li>
+										<li><span class="dot"/>Tunnel Wash</li>
+										<li><span class="dot"/>Self Serve</li>
+										<li><span class="dot"/>Fleet Wash</li>
+										<li><span class="dot"/>Mobile Wash</li>
+										<li><span class="dot"/>Chemicals</li>
+										<li><span class="dot"/>Water Treatment</li>
+										<li><span class="dot"/>Meterboxes</li>
+										<li><span class="dot"/>Pos Systems</li>
+										<li><span class="dot"/>Pay Stations</li>
+										<li><span class="dot"/>Change Machines</li>
+										<li><span class="dot"/>Signs &amp; Canopies</li>
+										<li><span class="dot"/>Bay Accessories</li>
 									</ul>
 								</div>
-								
-								<div id="left_menu_bottom" class="oe_structure col-md-12 mb16 mt16"/>
 							</div>
 							<div class="col-md-9">
 								<t t-raw="0"/>
@@ -183,5 +114,38 @@
 				</main>
 			</xpath>
 		</template>
+		
+		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="website.submenu">
+			<xpath expr="." position="replace">
+				<t name="Submenu" t-name="rlm_x1.submenu_extend">
+					<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+						<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
+							<span t-field="submenu.name"/>
+						</a>
+					</li>
+					<li t-if="submenu.child_id" t-attf-class="dropdown #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
+						<a class="dropdown-toggle" t-att-href="submenu.url">
+							<span t-field="submenu.name"/>
+							<span class="caret" t-ignore="true"/>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<t t-foreach="submenu.child_id" t-as="submenu">
+								<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+									<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
+										<span t-field="submenu.name"/>
+									</a>
+								</li>
+								<li t-if="submenu.child_id" t-attf-class="dropdown dropdown-submenu #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
+									<a class="dropdown-toggle" t-att-href="submenu.clean_url()">
+										<span t-field="submenu.name"/>
+									</a>
+								</li>
+							</t>
+						</ul>
+					</li>
+				</t>
+			</xpath>
+		</template>
+		
 	</data>
 </odoo>
