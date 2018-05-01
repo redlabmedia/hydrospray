@@ -114,6 +114,7 @@
 				</main>
 			</xpath>
 		</template>
+		
 		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="website.submenu">
 			<xpath expr="." position="replace">
 				<t name="Submenu" t-name="rlm_x1.submenu_extend">
@@ -145,5 +146,6 @@
 				</t>
 			</xpath>
 		</template>
+		
 	</data>
 </odoo>
