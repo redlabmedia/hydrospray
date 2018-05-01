@@ -28,42 +28,65 @@
 									<t t-set="path_item" t-value="request.env['website.menu'].search([('url', '=', request.httprequest.path)], limit=1)"/>
 									<!-- Parents -->
 									<t t-set="path_count" t-value="0"/>
+									<t t-set="path_id" t-value="0"/>
 									<t t-foreach="path_item.get_parents(True)" t-as="step">
-										<t t-set="path_count" t-value="path_count+1"/>
+									<t t-set="path_count" t-value="path_count+1"/>
 										<t t-if="path_count == 2">
-											<t t-foreach="step.child_id" t-as="x">
-												<t t-if="x.child_id">
-													<li t-att-class="         'active' if x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url()) else None         ">
-														<a t-att-href="x.clean_url()" t-ignore="true" t-att-target="'_blank' if x.new_window else None">
-															<span t-field="x.name"/>
-														</a>
-													</li>
-												</t>
+											<t t-foreach="step.child_id" t-as="x"> 
+											  <ul t-att-id="x.id" style="display:none;">
+									    	  <t t-if="x.child_id">  
+  													<li t-att-class="         'active' if x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url()) else None         ">
+  														<a t-att-href="x.clean_url()" t-ignore="true" t-att-target="'_blank' if x.new_window else None">
+  															<span t-field="x.name"/>
+  														</a>
+  													</li>
+  													<t t-if="x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url())">
+  													  <script type="text/javascript">
+  													    $( "ul#<t t-esc='x.id'/>" ).css( "display", "block" );
+  													  </script>
+  													</t>
+											    </t> 
 												<t t-foreach="x.child_id" t-as="y">
 													<li t-att-class="         'active' if y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url()) else None         ">
             											- <a t-att-href="y.clean_url()" t-ignore="true" t-att-target="'_blank' if y.new_window else None">
             												<span t-field="y.name"/>
             											</a>
-            										</li>
-													<t t-foreach="y.child_id" t-as="z">
+            										</li> 
+            										<t t-if="y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url())">
+      													  <script type="text/javascript">
+      													    $( "ul#<t t-esc='x.id'/>" ).css( "display", "block" );
+      													  </script>
+      													</t>
+            									<t t-foreach="y.child_id" t-as="z">
 														<li t-att-class="         'active' if z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url()) else None         ">
             												- - <a t-att-href="z.clean_url()" t-ignore="true" t-att-target="'_blank' if z.new_window else None">
             													<span t-field="z.name"/>
             												</a>
             											</li>
+            											<t t-if="z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url())">
+        													  <script type="text/javascript">
+        													    $( "ul#<t t-esc='x.id'/>" ).css( "display", "block" );
+        													  </script>
+        													</t>
 														<t t-foreach="z.child_id" t-as="q">
 															<li t-att-class="         'active' if q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url()) else None         ">
             													- - - <a t-att-href="q.clean_url()" t-ignore="true" t-att-target="'_blank' if q.new_window else None">
             														<span t-field="q.name"/>
             													</a>
             												</li>
+            												<t t-if="q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url())">
+          													  <script type="text/javascript">
+          													    $( "ul#<t t-esc='x.id'/>" ).css( "display", "block" );
+          													  </script>
+          													</t>
 														</t>
 													</t>
 												</t>
+												</ul>
 											</t>
 										</t>
 									</t>
-									
+								
 								</div>
 								<div class="col-md-12 mb16 mt16 topcat">
 									<h3>Top Categories</h3>
@@ -94,11 +117,12 @@
 							</div>
 						</t>
 					</div>
+		
 				</main>
-			</xpath>
+			</xpath>   
 		</template>
 		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="website.submenu">
-			<xpath expr="." position="replace">
+					<xpath expr="." position="replace">
 				<t name="Submenu" t-name="rlm_x1.submenu_extend">
 					<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
 						<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
@@ -106,7 +130,7 @@
 						</a>
 					</li>
 					<li t-if="submenu.child_id" t-attf-class="dropdown #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
-						<a class="dropdown-toggle" t-att-href="submenu.clean_url()">
+						<a class="dropdown-toggle" t-att-href="submenu.url">
 							<span t-field="submenu.name"/>
 							<span class="caret" t-ignore="true"/>
 						</a>
@@ -120,19 +144,13 @@
 								<li t-if="submenu.child_id" t-attf-class="dropdown dropdown-submenu #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
 									<a class="dropdown-toggle" t-att-href="submenu.clean_url()">
 										<span t-field="submenu.name"/>
-										<span class="caret" t-ignore="true"/>
 									</a>
-									<ul class="dropdown-menu" role="menu">
-										<t t-foreach="submenu.child_id" t-as="submenu">
-											<t t-call="rlm_x1.submenu_extend"/>
-										</t>
-									</ul>
-								</li>
+									</li> 			
 							</t>
 						</ul>
 					</li>
 				</t>
-			</xpath>
+			</xpa
 		</template>
 	</data>
 </odoo>
