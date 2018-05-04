@@ -114,11 +114,26 @@
 				</main>
 			</xpath>
 		</template>
-		
+		<!-- 
+			submenu_extend will provide for flyout menus along with the following css:
+				.navbar-nav li:hover > ul.dropdown-menu {
+					display: block;
+				}
+				.dropdown-submenu {
+					position:relative;
+				}
+				.dropdown-submenu>.dropdown-menu {
+					top:0;
+					left:100%;
+					margin-top:-6px;
+				}
+		-->
 		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="website.submenu">
 			<xpath expr="." position="replace">
 				<t name="Submenu" t-name="rlm_x1.submenu_extend">
-					<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+				<!-- uncomment for flyout menus -->
+				<!--					
+				<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
 						<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
 							<span t-field="submenu.name"/>
 						</a>
@@ -142,10 +157,30 @@
 								</li>
 							</t>
 						</ul>
+				
+				</li>-->
+					<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+						<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
+							<span t-field="submenu.name"/>
+						</a>
+					</li>
+					<li t-if="submenu.child_id" t-attf-class="dropdown #{         (submenu.clean_url() and submenu.clean_url() != '/' and any([request.httprequest.path == child.url for child in submenu.child_id if child.url]) or          (submenu.clean_url() and request.httprequest.path == submenu.clean_url())) and 'active'         }">
+						<a class="dropdown-toggle" data-toggle="dropdown" t-att-href="submenu.url">
+							<span t-field="submenu.name"/>
+							<span class="caret" t-ignore="true"/>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<t t-foreach="submenu.child_id" t-as="submenu">
+								<li t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
+									<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
+										<span t-field="submenu.name"/>
+									</a>
+								</li>
+							</t>
+						</ul>
 					</li>
 				</t>
 			</xpath>
 		</template>
-		
 	</data>
 </odoo>
