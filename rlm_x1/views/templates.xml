@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
 	<data>
 		<template id="assets_frontend" name="rlm_x1 assets" inherit_id="web.assets_frontend">
@@ -14,7 +14,7 @@
 		</template>
 		<template inherit_id="portal.frontend_layout" name="rlm_x1 Custom Menu Left" id="rlm_x1_custom_menu_left">
 			<xpath expr="//main" position="replace">
-				<main>
+				 <main>
 					<div class="row">
 						<t t-set="current_page" t-value="0"/>
 						<t t-foreach="website.menu_id.child_id" t-as="cp">
@@ -30,55 +30,100 @@
 									<!-- Parents -->
 									<t t-set="path_count" t-value="0"/>
 									<t t-set="path_id" t-value="0"/>
+									
+									<!-- increments for classes -->
+									<t t-set="path_i" t-value="0"/>
+									<t t-set="path_ii" t-value="0"/>
+									<t t-set="path_iii" t-value="0"/>
+									<t t-set="path_iv" t-value="0"/>
+									
 									<t t-foreach="path_item.get_parents(True)" t-as="step">
 										<t t-set="path_count" t-value="path_count+1"/>
-										<t t-if="path_count == 2">
-											<t t-foreach="step.child_id" t-as="x">
-												<ul t-att-id="x.id" style="display:none;">
-													<t t-if="x.child_id">
-														<li t-att-class="         'active' if x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url()) else None         ">
-															<a t-att-href="x.clean_url()" t-ignore="true" t-att-target="'_blank' if x.new_window else None">
-																<span t-field="x.name"/>
-															</a>
-														</li>
-														<t t-if="x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url())">
-															<script type="text/javascript">
-  													    $( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
-  													  </script>
-														</t>
-													</t>
-													<t t-foreach="x.child_id" t-as="y">
-														<li t-att-class="         'active' if y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url()) else None         ">
-            											- <a t-att-href="y.clean_url()" t-ignore="true" t-att-target="'_blank' if y.new_window else None"><span t-field="y.name"/></a>
-            										</li>
-														<t t-if="y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url())">
-															<script type="text/javascript">
-      													    $( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
-      													  </script>
-														</t>
-														<t t-foreach="y.child_id" t-as="z">
-															<li t-att-class="         'active' if z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url()) else None         ">
-            												- - <a t-att-href="z.clean_url()" t-ignore="true" t-att-target="'_blank' if z.new_window else None"><span t-field="z.name"/></a>
-            											</li>
-															<t t-if="z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url())">
-																<script type="text/javascript">
-        													    $( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
-        													  </script>
-															</t>
-															<t t-foreach="z.child_id" t-as="q">
-																<li t-att-class="         'active' if q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url()) else None         ">
-            													- - - <a t-att-href="q.clean_url()" t-ignore="true" t-att-target="'_blank' if q.new_window else None"><span t-field="q.name"/></a>
-            												</li>
-																<t t-if="q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url())">
-																	<script type="text/javascript">
-          													    $( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
-          													  </script>
+										<t t-if="path_count == 1">
+											<div class="panel-group" id="accordion">
+											<ul class="level0">
+												<t t-foreach="step.child_id" t-as="x">
+													<ul class="panel panel-default ac1 level1 collapsed collapse" t-att-id="x.id" style="display:none;">
+														<!-- level 1 -->
+														<t t-if="x.child_id">
+															<t t-set="path_i" t-value="path_i+1"/>
+															<t t-set="path_href1" t-value="'.ptha' + str(path_i)"/>
+															<t t-set="path_class1" t-value="'ptha' + str(path_i)"/>
+															<li data-toggle="collapse" data-parent="#accordion" t-att-href="path_href1" t-att-class="'list-group-item panel-collapse collapse active' if x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url()) else 'list-group-item panel-collapse collapse'">
+																<a onClick="event.stopPropagation();" t-att-href="x.clean_url()" t-ignore="true" t-att-target="'_blank' if x.new_window else None">
+																	<span t-field="x.name"/>
+																</a>
+																<t t-if="len(x.child_id) > 0">
+																	<span class="arrow">&#x25BC;</span>
 																</t>
+															</li>
+															<t t-if="x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url())">
+																<script type="text/javascript">
+  													   		 	$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+  													  		</script>
 															</t>
 														</t>
-													</t>
-												</ul>
-											</t>
+														<!-- level 2 -->
+														<t t-foreach="x.child_id" t-as="y">
+															<ul t-attf-class="level2 {{path_class1}} collapsed collapse" data-toggle="collapse" data-parent="#accordion">
+																<t t-set="path_ii" t-value="path_ii+1"/>
+																<t t-set="path_href2" t-value="'.pthb' + str(path_ii)"/>
+																<t t-set="path_class2" t-value="'pthb' + str(path_ii)"/>
+																<li  data-toggle="collapse" data-parent="#accordion" t-att-href="path_href2" t-att-class="'list-group-item active panel-collapse collapse' if y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url()) else 'list-group-item panel-collapse collapse'">
+																	<a onClick="event.stopPropagation();" t-att-href="y.clean_url()" t-ignore="true" t-att-target="'_blank' if y.new_window else None">
+																		<span t-field="y.name"/>
+																	</a>
+																	<t t-if="len(y.child_id) > 0">
+																		<span class="arrow">&#x25BC;</span>
+																	</t>
+																</li>
+																<t t-if="y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url())">
+																	<script type="text/javascript">
+																$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+															 </script>
+																</t>
+																<!-- level 3 -->
+																<t t-foreach="y.child_id" t-as="z">
+																	<ul t-attf-class="level3 {{path_class2}} collapsed collapse" data-toggle="collapse" data-parent="#accordion">
+																		<t t-set="path_iii" t-value="path_iii+1"/>
+																		<t t-set="path_href3" t-value="'.pthc' + str(path_iii)"/>
+																		<t t-set="path_class3" t-value="'pthc' + str(path_iii)"/>
+																		<li data-toggle="collapse" data-parent="#accordion" t-att-href="path_href3" t-att-class="'list-group-item active panel-collapse collapse' if z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url()) else 'list-group-item panel-collapse collapse'">
+																			<a onClick="event.stopPropagation();" t-att-href="z.clean_url()" t-ignore="true" t-att-target="'_blank' if z.new_window else None">
+																				<span t-field="z.name"/>
+																			</a>
+																			<t t-if="len(z.child_id) > 0">
+																				<span class="arrow">&#x25BC;</span>
+																			</t>
+																		</li>
+																		<t t-if="z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url())">
+																			<script type="text/javascript">
+																		$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+																	  </script>
+																		</t>
+																		<!-- level 4 -->
+																		<t t-foreach="z.child_id" t-as="q">
+																			<ul t-attf-class="level4 {{path_class3}} collapsed collapse">
+																				<li t-att-class="'list-group-item active panel-collapse collapse' if q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url()) else 'list-group-item panel-collapse collapse'">
+																					<a onClick="event.stopPropagation();" t-att-href="q.clean_url()" t-ignore="true" t-att-target="'_blank' if q.new_window else None">
+																						<span t-field="q.name"/>
+																					</a>
+																				</li>
+																				<t t-if="q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url())">
+																					<script type="text/javascript">
+																			$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+																		  </script>
+																				</t>
+																			</ul>
+																		</t>
+																	</ul>
+																</t>
+															</ul>
+														</t>
+													</ul>
+												</t>
+											</ul>
+											</div>
 										</t>
 									</t>
 								</div>
@@ -131,8 +176,8 @@
 		<template id="submenu_extend" name="rlm_x1 submenu extend" inherit_id="website.submenu">
 			<xpath expr="." position="replace">
 				<t name="Submenu" t-name="rlm_x1.submenu_extend">
-				<!-- uncomment for flyout menus -->
-				<!--					
+					<!-- uncomment for flyout menus -->
+					<!--					
 				<li t-if="not submenu.child_id" t-att-class="         'active' if submenu.clean_url() and unslug_url(request.httprequest.path) == unslug_url(submenu.clean_url()) else None         ">
 						<a t-att-href="submenu.clean_url()" t-ignore="true" t-att-target="'_blank' if submenu.new_window else None">
 							<span t-field="submenu.name"/>

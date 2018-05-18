@@ -1,5 +1,76 @@
 /* insert custom less here */
 
+ul.level0,
+ul.level0 ul,
+ul.level0 li {
+    list-style-type: none;
+    -webkit-padding-start: 0;
+}
+
+
+
+ul.level0 li {
+    border-bottom:1px solid #333;
+}
+
+li span.arrow {
+ float:right; 
+ color:#fff;
+}
+
+ul.level1 > li {
+    background-color: #23527c;
+    padding:3px !important;
+}
+ul.level1 > li a {
+    color:#fff;
+}
+
+ul.level2 > li {
+    background-color: #666;
+    padding:3px !important;
+}
+ul.level2 > li a {
+    color:#fff;
+}
+ul.level3 > li {
+    background-color: #ccc;
+    padding:3px !important;
+}
+ul.level3 > li a {
+    color:#000;
+}
+ul.level4 > li {
+    background-color: #fff;
+    padding:3px !important;
+}
+ul.level4 > li a {
+    color:#000;
+}
+ul .list-group-item:first-child {
+    border-top-right-radius:0;  
+     border-top-left-radius:0;
+}
+ul .list-group-item:last-child {
+    border-bottom-right-radius:0;  
+     border-bottom-left-radius:0;
+}
+
+		  #accordion .glyphicon { margin-right:10px; }
+		  .panel-collapse>.list-group .list-group-item:first-child {border-top-right-radius: 0;border-top-left-radius: 0;}
+		  .panel-collapse>.list-group .list-group-item {border-width: 1px 0;}
+		  .panel-collapse>.list-group {margin-bottom: 0;}
+		  .panel-collapse .list-group-item {border-radius:0;}
+
+		  .panel-collapse .list-group .list-group {margin: 0;margin-top: 10px;}
+		  .panel-collapse .list-group-item li.list-group-item {margin: 0 -15px;border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+		  .panel-collapse .list-group-item li.list-group-item:last-child {padding-bottom: 0;}
+
+		  .panel-collapse .list-group .list-group{margin: 0;}
+		  .panel-collapse .list-group .list-group a.list-group-item {border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+		  .panel-collapse .list-group-item li.list-group-item {border-top: 1px solid #DDD !important;}
+      .panel .list-group-item {padding:0;}
+
 #wrapwrap , 
 #wrapwrap *:not(i),  
 #wrapwrap *:not(.fa) {
@@ -131,7 +202,7 @@ div#support2 {
     }
     div.topright img {
         display:none;
-    }
+     }
     div.needassist {
         padding-top:4px;
         font-size:10px;
