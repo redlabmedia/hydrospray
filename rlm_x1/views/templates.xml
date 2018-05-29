@@ -36,6 +36,10 @@
 									<t t-set="path_ii" t-value="0"/>
 									<t t-set="path_iii" t-value="0"/>
 									<t t-set="path_iv" t-value="0"/>
+									<t t-set="xid" t-value="0"/>
+									<t t-set="yid" t-value="0"/>
+									<t t-set="zid" t-value="0"/>
+									<t t-set="qid" t-value="0"/>
 									
 									<t t-foreach="path_item.get_parents(True)" t-as="step">
 										<t t-set="path_count" t-value="path_count+1"/>
@@ -54,18 +58,20 @@
 																	<span t-field="x.name"/>
 																</a>
 																<t t-if="len(x.child_id) > 0">
-																	<span class="arrow">&#x25BC;</span>
+																	<span class="arrow">&#8628;</span>
 																</t>
 															</li>
 															<t t-if="x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url())">
+																<t t-set="xid" t-value="x.id"/>
 																<script type="text/javascript">
-  													   		 	$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
-  													  		</script>
+  													   		 		$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+  													   		 		$( "ul#<t t-esc="x.id"/>").collapse("show");
+  													  			</script>
 															</t>
 														</t>
 														<!-- level 2 -->
 														<t t-foreach="x.child_id" t-as="y">
-															<ul t-attf-class="level2 {{path_class1}} collapsed collapse" data-toggle="collapse" data-parent="#accordion">
+															<ul t-attf-class="level2 {{path_class1}} collapsed collapse" t-att-id="y.id"  data-toggle="collapse" data-parent="#accordion">
 																<t t-set="path_ii" t-value="path_ii+1"/>
 																<t t-set="path_href2" t-value="'.pthb' + str(path_ii)"/>
 																<t t-set="path_class2" t-value="'pthb' + str(path_ii)"/>
@@ -74,17 +80,20 @@
 																		<span t-field="y.name"/>
 																	</a>
 																	<t t-if="len(y.child_id) > 0">
-																		<span class="arrow">&#x25BC;</span>
+																		<span class="arrow">&#8628;</span>
 																	</t>
 																</li>
 																<t t-if="y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url())">
+																	<t t-set="yid" t-value="y.id"/>
 																	<script type="text/javascript">
-																$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
-															 </script>
+																		$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+																		$( "ul#<t t-esc="y.id"/>" ).collapse("show");
+																		$( "ul#<t t-esc="y.id"/>" ).parents("ul.collapse").collapse("show");
+																	 </script>
 																</t>
 																<!-- level 3 -->
 																<t t-foreach="y.child_id" t-as="z">
-																	<ul t-attf-class="level3 {{path_class2}} collapsed collapse" data-toggle="collapse" data-parent="#accordion">
+																	<ul t-attf-class="level3 {{path_class2}} collapsed collapse" t-att-id="z.id" data-toggle="collapse" data-parent="#accordion">
 																		<t t-set="path_iii" t-value="path_iii+1"/>
 																		<t t-set="path_href3" t-value="'.pthc' + str(path_iii)"/>
 																		<t t-set="path_class3" t-value="'pthc' + str(path_iii)"/>
@@ -93,26 +102,32 @@
 																				<span t-field="z.name"/>
 																			</a>
 																			<t t-if="len(z.child_id) > 0">
-																				<span class="arrow">&#x25BC;</span>
+																				<span class="arrow">&#8628;</span>
 																			</t>
 																		</li>
 																		<t t-if="z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url())">
+																			<t t-set="zid" t-value="z.id"/>
 																			<script type="text/javascript">
-																		$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
-																	  </script>
+																				$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+																				$( "ul#<t t-esc="z.id"/>" ).collapse("show");
+																				$( "ul#<t t-esc="z.id"/>" ).parents("ul.collapse").collapse("show");
+																		 	</script>
 																		</t>
 																		<!-- level 4 -->
 																		<t t-foreach="z.child_id" t-as="q">
-																			<ul t-attf-class="level4 {{path_class3}} collapsed collapse">
-																				<li t-att-class="'list-group-item active panel-collapse collapse' if q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url()) else 'list-group-item panel-collapse collapse'">
+																			<ul t-attf-class="level4 {{path_class3}} collapsed collapse" t-att-id="q.id" >
+																				<li t-att-class="'list-group-item panel-collapse collapse' if q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url()) else 'list-group-item panel-collapse collapse'">
 																					<a onClick="event.stopPropagation();" t-att-href="q.clean_url()" t-ignore="true" t-att-target="'_blank' if q.new_window else None">
 																						<span t-field="q.name"/>
 																					</a>
 																				</li>
 																				<t t-if="q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url())">
+																					<t t-set="qid" t-value="q.id"/>
 																					<script type="text/javascript">
-																			$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
-																		  </script>
+																						$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
+																						$( "ul#<t t-esc="q.id"/>" ).collapse("show");
+																						$( "ul#<t t-esc="q.id"/>" ).parents("ul.collapse").collapse("show");
+																					</script>
 																				</t>
 																			</ul>
 																		</t>
@@ -122,6 +137,12 @@
 														</t>
 													</ul>
 												</t>
+												<script type="text/javascript">
+  													$( "ul#<t t-esc="xid"/>" ).siblings("ul.collapse").collapse("show");
+  													$( "ul#<t t-esc="yid"/>" ).siblings("ul.collapse").collapse("show");
+  													$( "ul#<t t-esc="zid"/>" ).siblings("ul.collapse").collapse("show");
+  													$( "ul#<t t-esc="qid"/>" ).siblings("ul.collapse").collapse("show");
+  												</script>
 											</ul>
 											</div>
 										</t>

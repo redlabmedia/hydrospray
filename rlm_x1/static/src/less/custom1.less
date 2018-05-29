@@ -1,5 +1,18 @@
 /* insert custom less here */
 
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    color: #000;
+    background-color: #eee !important;
+}
+
+#top_menu > li.active, #top_menu > li.active a, #top_menu > li.open, #top_menu > li.open a {
+    background: #aaa !important; 
+}
+
+ul.level0 * {
+    font-size:12px !important;   
+}
+
 ul.level0,
 ul.level0 ul,
 ul.level0 li {
@@ -7,44 +20,48 @@ ul.level0 li {
     -webkit-padding-start: 0;
 }
 
-
-
 ul.level0 li {
     border-bottom:1px solid #333;
 }
 
 li span.arrow {
- float:right; 
- color:#fff;
+ color:#000;
+}
+
+li span.arrow:hover {
+ cursor:pointer;
 }
 
 ul.level1 > li {
-    background-color: #23527c;
+    border:1px solid #23527c;
     padding:3px !important;
 }
 ul.level1 > li a {
-    color:#fff;
+    color:#000;
 }
 
 ul.level2 > li {
-    background-color: #666;
+    border:1px solid #666;
     padding:3px !important;
 }
 ul.level2 > li a {
-    color:#fff;
+    margin-left:10px;
+    color:#000;
 }
 ul.level3 > li {
-    background-color: #ccc;
+    border:1px solid #ccc;
     padding:3px !important;
 }
 ul.level3 > li a {
+    margin-left:20px;
     color:#000;
 }
 ul.level4 > li {
-    background-color: #fff;
+    border:1px solid #eee;
     padding:3px !important;
 }
 ul.level4 > li a {
+    margin-left:30px;
     color:#000;
 }
 ul .list-group-item:first-child {
