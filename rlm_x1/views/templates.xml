@@ -40,6 +40,7 @@
 									<t t-set="yid" t-value="0"/>
 									<t t-set="zid" t-value="0"/>
 									<t t-set="qid" t-value="0"/>
+									<t t-set="pthsub" t-value="0"/>
 									
 									<t t-foreach="path_item.get_parents(True)" t-as="step">
 										<t t-set="path_count" t-value="path_count+1"/>
@@ -63,6 +64,7 @@
 															</li>
 															<t t-if="x.clean_url() and unslug_url(request.httprequest.path) == unslug_url(x.clean_url())">
 																<t t-set="xid" t-value="x.id"/>
+																<t t-set="pthsub" t-value="path_class1"/>
 																<script type="text/javascript">
   													   		 		$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
   													   		 		$( "ul#<t t-esc="x.id"/>").collapse("show");
@@ -85,6 +87,7 @@
 																</li>
 																<t t-if="y.clean_url() and unslug_url(request.httprequest.path) == unslug_url(y.clean_url())">
 																	<t t-set="yid" t-value="y.id"/>
+																	<t t-set="pthsub" t-value="path_class2"/>
 																	<script type="text/javascript">
 																		$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
 																		$( "ul#<t t-esc="y.id"/>" ).collapse("show");
@@ -107,6 +110,7 @@
 																		</li>
 																		<t t-if="z.clean_url() and unslug_url(request.httprequest.path) == unslug_url(z.clean_url())">
 																			<t t-set="zid" t-value="z.id"/>
+																			<t t-set="pthsub" t-value="path_class3"/>
 																			<script type="text/javascript">
 																				$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
 																				$( "ul#<t t-esc="z.id"/>" ).collapse("show");
@@ -123,6 +127,7 @@
 																				</li>
 																				<t t-if="q.clean_url() and unslug_url(request.httprequest.path) == unslug_url(q.clean_url())">
 																					<t t-set="qid" t-value="q.id"/>
+																					<t t-set="pthsub" t-value="path_class4"/>
 																					<script type="text/javascript">
 																						$( "ul#<t t-esc="x.id"/>" ).css( "display", "block" );
 																						$( "ul#<t t-esc="q.id"/>" ).collapse("show");
@@ -142,6 +147,9 @@
   													$( "ul#<t t-esc="yid"/>" ).siblings("ul.collapse").collapse("show");
   													$( "ul#<t t-esc="zid"/>" ).siblings("ul.collapse").collapse("show");
   													$( "ul#<t t-esc="qid"/>" ).siblings("ul.collapse").collapse("show");
+  													
+  													$( "ul.<t t-esc="pthsub"/>").collapse("show");
+  													  			
   												</script>
 											</ul>
 											</div>
