@@ -11,17 +11,17 @@
 	                    <div  style="border-bottom:1px solid;width:355px;"/>
 	                    <t t-if="doc.partner_invoice_id.company_type =='person' and doc.partner_invoice_id.parent_id">
 	                        <span t-esc="doc.partner_id.ref"/>
-	                    	<t t-if="(doc.partner_invoice_id.parent_id.country_id and doc.partner_invoice_id.parent_id.country_id.code == 'US') or not doc.partner_invoice_id.parent_id.country_id">
+	                    	<t t-if="(doc.partner_invoice_id.country_id and doc.partner_invoice_id.parent_id.country_id.code == 'US') or not doc.partner_invoice_id.parent_id.country_id">
 	                    		<div t-field="doc.partner_invoice_id" t-options='{"widget": "contact", "fields": ["city","parent_name", "phone", "fax"], "no_marker": True, "phone_icons": True}'/>
 	                    	</t>
 
-	                    	<t t-if="doc.partner_invoice_id.parent_id.country_id and doc.partner_invoice_id.parent_id.country_id.code != 'US'">
+	                    	<t t-if="doc.partner_invoice_id.country_id and doc.partner_invoice_id.parent_id.country_id.code != 'US'">
 	                    		<div t-field="doc.partner_invoice_id" t-options='{"widget": "contact", "fields": ["address","parent_name", "phone", "fax"], "no_marker": True, "phone_icons": True}'/>
 	                    	</t>
 	                    	
-	                    		<t t-if="doc.partner_invoice_id.parent_id.x_studio_field_AA4JU">
+	                    		<t t-if="doc.partner_invoice_id.x_studio_field_AA4JU">
 	                    			<i class="fa fa-fax" aria-hidden="true">
-	                    			<span t-field="doc.partner_invoice_id.parent_id.x_studio_field_AA4JU"/>
+	                    			<span t-field="doc.partner_invoice_id.x_studio_field_AA4JU"/>
 	                    			</i>
 	                    		</t>
 	                    	
@@ -71,15 +71,15 @@
 	                    <strong>Ship To:</strong>
 	                    <div  style="border-bottom:1px solid;width:355px;"/>
 	                    <t t-if="doc.partner_shipping_id.company_type =='person' and doc.partner_shipping_id.parent_id">
-	                    	<t t-if="(doc.partner_shipping_id.parent_id.country_id and doc.partner_shipping_id.parent_id.country_id.code == 'US') or not doc.partner_shipping_id.parent_id.country_id">
+	                    	<t t-if="(doc.partner_shipping_id.country_id and doc.partner_shipping_id.country_id.code == 'US') or not doc.partner_shipping_id.country_id">
 	                    		<div t-field="doc.partner_shipping_id" t-options='{"widget": "contact", "fields": ["city","name","phone", "fax"], "no_marker": True, "phone_icons": True}'/>
 	                    	</t>
-	                    	<t t-if="doc.partner_shipping_id.parent_id.country_id and doc.partner_shipping_id.parent_id.country_id.code != 'US'">
+	                    	<t t-if="doc.partner_shipping_id.country_id and doc.partner_shipping_id.country_id.code != 'US'">
 	                    		<div t-field="doc.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address","name","phone", "fax"], "no_marker": True, "phone_icons": True}'/>
 	                    	</t>
-	                    	<t t-if="doc.partner_shipping_id.parent_id.x_studio_field_AA4JU">
+	                    	<t t-if="doc.partner_shipping_id.x_studio_field_AA4JU">
 	                    		<i class="fa fa-fax" aria-hidden="true">
-	                    		<span t-field="doc.partner_shipping_id.parent_id.x_studio_field_AA4JU"/>
+	                    		<span t-field="doc.partner_shipping_id.x_studio_field_AA4JU"/>
 	                    		</i>
 	                    	</t>
 	                    	
@@ -92,9 +92,9 @@
 	                    	<t t-if="doc.partner_shipping_id.country_id and doc.partner_shipping_id.country_id.code != 'US'">
 	                    		<div t-field="doc.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address","name", "phone", "fax"], "no_marker": True, "phone_icons": True}'/>
 	                    	</t>
-	                    	<t t-if="doc.partner_shipping_id.parent_id.x_studio_field_AA4JU">
+	                    	<t t-if="doc.partner_shipping_id.x_studio_field_AA4JU">
 	                    		<i class="fa fa-fax" aria-hidden="true">
-	                    		<span t-field="doc.partner_shipping_id.parent_id.x_studio_field_AA4JU"/>
+	                    		<span t-field="doc.partner_shipping_id.x_studio_field_AA4JU"/>
 	                    		</i>
 	                    	</t>
 	                    </t>
