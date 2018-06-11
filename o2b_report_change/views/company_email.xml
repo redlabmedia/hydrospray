@@ -11,6 +11,7 @@
             				<group>
 	            				<field name="quotes_email"/>
 	            				<field name="so_invoice_email"/>
+                                <field name="purchase_email"/>
             				</group>
             			</group>
             		</page>

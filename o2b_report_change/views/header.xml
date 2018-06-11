@@ -41,6 +41,21 @@
                         </t>
                     </div>
                 </t>
+
+                <t t-if="doc and doc._name =='purchase.order'">
+                    <div class="col-xs-13 text-right" style="margin-top:0px;">
+                        <h3>
+                            <span t-if="doc.state in ['draft','sent']">RFQ#</span>
+                            <span t-if="doc.state not in ['draft','sent']">PO#</span>
+                            <span t-esc="o.sudo().name_po_change()"/>
+                        </h3>
+                        <t t-if="o.date_order" class="col-xs-3 text-right">
+                            <span t-if="doc.state in ['draft','sent']"><strong>Date:</strong></span>
+                            <span t-if="doc.state not in ['draft','sent']"><strong>Order Date:</strong></span>
+                            <span t-field="o.date_order" t-field-options="{&quot;format&quot;: &quot;MM/dd/yyyy&quot;}"/>
+                        </t>
+                    </div>
+                </t>
                 
                 <t t-if="doc and doc._name =='account.invoice'">
                     <div class="col-xs-13 text-right" style="margin-top:0px;">
@@ -56,6 +71,28 @@
                         <t t-if="o.date_invoice" class="col-xs-3 text-right">
                             <p><strong>Invoice Date:</strong>
                             <span t-field="o.date_invoice"/></p>
+                        </t>
+                    </div>
+                </t>
+                <t t-if="doc and doc._name =='stock.picking'">
+                    <div class="col-xs-13 text-right" style="margin-top:0px;">
+                        <h3>
+                            <t t-if="o.purchase_id and not o.sale_id">
+                                <span >Receipt #</span>
+                                <span t-esc="o.sudo().name_change()"/>
+                            </t>
+                            <t t-if="'IN' not in o.name">
+                                <span t-esc="o.sudo().name_change()"/>
+                            </t>
+                        </h3>
+                        <t class="col-xs-3 text-right">
+                            <p><strong>Date:</strong>
+                            <t t-if="o.state == 'done'">
+                                <span t-field="o.date_done" t-field-options="{&quot;format&quot;: &quot;MM/dd/yyyy&quot;}"/>
+                            </t>
+                            <t t-if="o.state != 'done'">
+                                <span t-field="o.scheduled_date" t-field-options="{&quot;format&quot;: &quot;MM/dd/yyyy&quot;}"/>
+                            </t></p>
                         </t>
                     </div>
                 </t>
@@ -92,7 +129,10 @@
                     <t t-if="doc and doc._name =='account.invoice'">
                         <li t-if="company.so_invoice_email">Email: <span t-field="company.so_invoice_email"/></li>
                     </t>
-                    <t t-if="doc and doc._name not in ['sale.order','account.invoice']">
+                    <t t-if="doc and doc._name =='purchase.order'">
+                        <li t-if="company.purchase_email">Email: <span t-field="company.purchase_email"/></li>
+                    </t>
+                    <t t-if="doc and doc._name not in ['sale.order','account.invoice','purchase.order']">
                         <li t-if="company.email">Email: <span t-field="company.email"/></li>
                     </t>
 

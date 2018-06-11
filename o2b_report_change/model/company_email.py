@@ -6,3 +6,4 @@ class Company(models.Model):
 
     quotes_email = fields.Char(string='Quotes Email')
     so_invoice_email = fields.Char(string='SO and Invoice Email')
+    purchase_email = fields.Char(string="Purchase Email")
