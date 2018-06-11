@@ -55,6 +55,9 @@ class SaleOrder(models.Model):
         expected_del_date = confirmation_date +timedelta(days=days)
         expected_date_val = expected_del_date.strftime("%Y-%m-%d")
         self.write({'expected_delivery_date':expected_date_val})
+        if self.po_number and self.picking_ids:
+            for each_picking in self.picking_ids:
+                each_picking.write({'po_number':self.po_number})
         return res
 
     # shipment date populate from SO 
@@ -63,6 +66,57 @@ class SaleOrder(models.Model):
         res = super(SaleOrder,self)._prepare_invoice()
         res.update({'shipment_date':self.expected_delivery_date})
         return res
+
+class PurchaseOrder(models.Model):
+    _inherit = "purchase.order"
+
+    po_number = fields.Char(string="PO Number")
+    ship_via = fields.Char(string="Ship Via")
+
+    def name_po_change(self):
+        name_dup = ''
+        if self.name:
+            a = self.name
+            name_dup = a.replace('PO' , '')
+        return name_dup
+
+    @api.multi
+    def button_confirm(self):
+        res = super(PurchaseOrder,self).button_confirm()
+        if self.po_number and self.picking_ids:
+            for each_picking in self.picking_ids:
+                each_picking.write({'po_number':self.po_number})
+        return res
+
+class Stock_picking(models.Model):
+    _inherit = "stock.picking"
+
+    po_number = fields.Char(string="Customer PO")
+
+    def name_change(self):
+        nam = ''
+        if self.sale_id and not self.purchase_id:
+            name = str(self.name)
+            a,b,c = name.split('/')
+            if b == 'IN':
+                nam = b+c
+            else:
+                if b == 'PICK':
+                    nam = b + ' TICKET' + ' # '+c
+                else:
+                    nam = b + ' # '+c
+                
+        elif self.purchase_id and not self.sale_id:
+            d = self.purchase_id.name
+            nam = d.replace('PO' , '')
+        elif self.purchase_id and self.sale_id:
+            if self.name:
+                name = str(self.name)
+                if 'DS' in name:
+                    a = name.replace('DS','')
+                nam = 'DS #'+str(a)
+        return nam
+
 
 
 class AccountInvoice(models.Model):
